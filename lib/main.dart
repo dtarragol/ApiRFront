@@ -1,6 +1,7 @@
-// lib/main.dart
 import 'package:apir_front/src/providers/UserProvider.dart';
+import 'package:apir_front/src/ui/screens/Home.dart';
 import 'package:apir_front/src/ui/screens/Login.dart';
+import 'package:apir_front/src/ui/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,8 +20,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //home: HomeScreen(),
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.light, 
       home: LoginPage(),
+      //home: HomeScreen(),
     );
   }
 }

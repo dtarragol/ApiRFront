@@ -1,7 +1,7 @@
 class ApiUrlConstants {
   static const String baseUrl = 'https://localhost:7030';
   static const String loginController = '/api/Login'; 
-  static const String usersController = '/api/Users'; 
+  static const String usersController = '/api/User'; 
   static const String propertyController = '/api/Property'; 
   static const String parkingController = '/api/Parking'; 
   static const String apartmentController = '/api/Apartment'; 

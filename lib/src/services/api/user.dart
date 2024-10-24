@@ -1,11 +1,11 @@
+import 'package:apir_front/src/utils/api_constants.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ApiUserPost {
-  late String baseUrl = "";
 
-  Future<Map<String, dynamic>> getUserData(String userId) async {
-    final response = await http.get(Uri.parse('$baseUrl/users/$userId'));
+  static Future<Map<String, dynamic>> getUserData(int userId) async {
+    final response = await http.get(Uri.parse(ApiGetUserConstants.byId(userId)));
 
     if (response.statusCode == 200) {
       return json.decode(response.body);
@@ -14,9 +14,9 @@ class ApiUserPost {
     }
   }
 
-  Future<Map<String, dynamic>> postUserData(Map<String, dynamic> userData) async {
-    final response = await http.post(
-      Uri.parse('$baseUrl/users'),
+  static Future<Map<String, dynamic>> postUserData(Map<String, String> userData) async {
+    final   response = await http.post(
+      Uri.parse(ApiPostUserConstants.newUser),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
