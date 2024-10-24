@@ -1,3 +1,6 @@
+import 'package:apir_front/src/models/PropertyModel.dart';
+import 'package:apir_front/src/services/api/user.dart';
+import 'package:apir_front/src/ui/widgets/CustomCard.dart';
 import 'package:apir_front/src/ui/widgets/CustomSearchAppBar.dart';
 import 'package:flutter/material.dart';
 
@@ -9,10 +12,13 @@ class SearchProperties extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchProperties> {
   String _searchQuery = '';
+  List<PropertyModel> _properties = [];
 
-  void _onSearchChanged(String query) {
+  void _onSearchChanged(String query) async {
+      var listProperties = await ApiUserPost.searchProperties(query);
     setState(() {
       _searchQuery = query;
+      _properties = listProperties;
     });
   }
 
@@ -28,9 +34,23 @@ class _SearchScreenState extends State<SearchProperties> {
         onSearchChanged: _onSearchChanged,
         onFilterPressed: _onFilterPressed,
       ),
-      body: Center(
-        child: Text('Search query: $_searchQuery'),
-      ),
+      body: _properties.isEmpty
+          ? Center(child: Text('No se han encontrado propiedades con la busqueda: $_searchQuery'))
+          : ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              itemCount: _properties.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: CustomCard(
+                    onPressed: () {
+                      // Acción al presionar la tarjeta
+                    },
+                    text: _properties[index].name,
+                  ),
+                );
+              },
+            ),
     );
   }
 }

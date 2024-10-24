@@ -39,6 +39,7 @@ class ApiPatchUserConstants {
 class ApiGetPropertyConstants {
   static const String allPropertyNoPag = ApiUrlConstants.baseUrl + ApiUrlConstants.propertyController;
   static String byId(int idUSer) => "${ ApiUrlConstants.baseUrl + ApiUrlConstants.propertyController }/$idUSer";
+  static String search(String query) => "${ ApiUrlConstants.baseUrl + ApiUrlConstants.propertyController }/search/$query";
 }
 class ApiPostPropertyConstants {
   static const String newProperty = ApiUrlConstants.baseUrl + ApiUrlConstants.propertyController;
