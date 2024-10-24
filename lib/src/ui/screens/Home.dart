@@ -1,4 +1,4 @@
-import 'package:apir_front/src/ui/screens/MiProperties.dart';
+import 'package:apir_front/src/ui/screens/MyProperties.dart';
 import 'package:apir_front/src/ui/screens/SearchProperties.dart';
 import 'package:flutter/material.dart';
 import 'package:apir_front/src/ui/themes/app_theme.dart';
@@ -14,7 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     SearchProperties(),
-    ProfileScreen(),
+    MyProperties(),
     SettingsScreen(),
     SettingsScreen(),
   ];

@@ -1,7 +1,7 @@
 import 'package:apir_front/src/ui/widgets/CustomCard.dart';
 import 'package:flutter/material.dart';
 
-class ProfileScreen extends StatelessWidget {
+class MyProperties extends StatelessWidget {
   final List<String> properties = [
     'Property 1',
     'Property 2',

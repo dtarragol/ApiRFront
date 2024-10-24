@@ -15,35 +15,6 @@ class ApiUserPost {
     }
   }
   
-  //Trae una lista de candidatos
-  static Future<List<PropertyModel>> searchProperties(String search) async {
-
-    // const storage = FlutterSecureStorage();
-    // String? token = await storage.read(key: 'jwt_token');
-    
-    // if (token == null) {
-    //   throw Exception(ApiError.TOKEN_NOT_FOUND);
-    // }
-
-    final response = await http.get(
-      Uri.parse(ApiGetPropertyConstants.search(search)),
-      headers: <String, String>{
-        // 'Authorization': 'Bearer $token',
-        'Content-Type': 'application/json'
-      }
-    );
-
-    if (response.statusCode == 200) {
-      List<dynamic> jsonResponse = json.decode(response.body);
-
-      List<PropertyModel> propertyList = jsonResponse.map((json) 
-                                          => PropertyModel.fromJson(json)).toList();
-      return propertyList;
-    } else {
-      throw Exception('Failed to load properties');
-    }
-  }
-
 
   static Future<Map<String, dynamic>> postUserData(Map<String, String> userData) async {
     final   response = await http.post(

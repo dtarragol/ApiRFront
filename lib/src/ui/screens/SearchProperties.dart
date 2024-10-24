@@ -1,5 +1,7 @@
 import 'package:apir_front/src/models/PropertyModel.dart';
+import 'package:apir_front/src/services/api/property.dart';
 import 'package:apir_front/src/services/api/user.dart';
+import 'package:apir_front/src/ui/screens/PropertyDetail.dart';
 import 'package:apir_front/src/ui/widgets/CustomCard.dart';
 import 'package:apir_front/src/ui/widgets/CustomSearchAppBar.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +17,7 @@ class _SearchScreenState extends State<SearchProperties> {
   List<PropertyModel> _properties = [];
 
   void _onSearchChanged(String query) async {
-      var listProperties = await ApiUserPost.searchProperties(query);
+      var listProperties = await ApiPropertyGet.searchProperties(query);
     setState(() {
       _searchQuery = query;
       _properties = listProperties;
@@ -44,7 +46,10 @@ class _SearchScreenState extends State<SearchProperties> {
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: CustomCard(
                     onPressed: () {
-                      // Acción al presionar la tarjeta
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => PropertyDetail(_properties[index])),
+                      );
                     },
                     text: _properties[index].name,
                   ),

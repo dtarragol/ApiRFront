@@ -7,6 +7,8 @@ class ApiUrlConstants {
   static const String apartmentController = '/api/Apartment'; 
   static const String imageController = '/api/Image'; 
   static const String masterDataController = '/api/MasterData'; 
+  static const String image01 = '$baseUrl/PropertyImages/house01.jpeg'; 
+  static const String image02 = '$baseUrl/PropertyImages/house02.jpeg'; 
 }
 
 //LOGIN
