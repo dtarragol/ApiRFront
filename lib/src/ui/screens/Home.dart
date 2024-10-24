@@ -1,4 +1,5 @@
 import 'package:apir_front/src/ui/screens/MiProperties.dart';
+import 'package:apir_front/src/ui/screens/SearchProperties.dart';
 import 'package:flutter/material.dart';
 import 'package:apir_front/src/ui/themes/app_theme.dart';
 import 'package:apir_front/src/ui/widgets/CustomAppBar.dart';
@@ -11,8 +12,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
-  static List<Widget> _widgetOptions = <Widget>[
-    DashboardScreen(),
+  static final List<Widget> _widgetOptions = <Widget>[
+    SearchProperties(),
     ProfileScreen(),
     SettingsScreen(),
     SettingsScreen(),
@@ -75,14 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-class DashboardScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Dashboard Screen'),
-    );
-  }
-}
+
 class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
