@@ -25,6 +25,7 @@ class ApiPostUserConstants {
 class ApiGetUserConstants {
   static const String allUserNoPag = ApiUrlConstants.baseUrl + ApiUrlConstants.usersController;
   static String byId(int idUSer) => "${ ApiUrlConstants.baseUrl + ApiUrlConstants.usersController }/$idUSer";
+  static const String idUserLoged = "${ ApiUrlConstants.baseUrl + ApiUrlConstants.usersController }/GetUserLoggedId";
   static String byEmail(String email) => "${ ApiUrlConstants.baseUrl + ApiUrlConstants.usersController }/email/$email";
   static String fullNameById(int idUSer) => "${ ApiUrlConstants.baseUrl + ApiUrlConstants.usersController }/$idUSer/FullName";
   static String idByEmail(String email) => "${ ApiUrlConstants.baseUrl + ApiUrlConstants.usersController }/$email/Id";
@@ -41,6 +42,7 @@ class ApiPatchUserConstants {
 class ApiGetPropertyConstants {
   static const String allPropertyNoPag = ApiUrlConstants.baseUrl + ApiUrlConstants.propertyController;
   static String byId(int idUSer) => "${ ApiUrlConstants.baseUrl + ApiUrlConstants.propertyController }/$idUSer";
+  static String byIdUser(int idUSer) => "${ ApiUrlConstants.baseUrl + ApiUrlConstants.propertyController }/user/$idUSer";
   static String search(String query) => "${ ApiUrlConstants.baseUrl + ApiUrlConstants.propertyController }/search/$query";
 }
 class ApiPostPropertyConstants {
@@ -57,7 +59,8 @@ class ApiDeletePropertyConstants {
 //APARTMENT
 class ApiGetApartmentConstants {
   static const String allApartmentNoPag = ApiUrlConstants.baseUrl + ApiUrlConstants.apartmentController;
-  static String byId(int idUSer) => "${ ApiUrlConstants.baseUrl + ApiUrlConstants.apartmentController }/$idUSer";
+  static String byId(int id) => "${ ApiUrlConstants.baseUrl + ApiUrlConstants.apartmentController }/$id";
+  static String byIdProperty(int idProperty) => "${ ApiUrlConstants.baseUrl + ApiUrlConstants.apartmentController }/bypropertyid/$idProperty";
 }
 class ApiPostApartmentConstants {
   static const String newApartment = ApiUrlConstants.baseUrl + ApiUrlConstants.apartmentController;

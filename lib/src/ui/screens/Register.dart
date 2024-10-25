@@ -1,3 +1,4 @@
+import 'package:apir_front/src/models/NewUserModel.dart';
 import 'package:apir_front/src/models/UserModel.dart';
 import 'package:apir_front/src/services/api/login.dart';
 import 'package:apir_front/src/services/api/user.dart';
@@ -27,7 +28,7 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
     String email = _emailController.text;
     String password = _passwordController.text;
 
-    var user = UserModel(
+    var user = NewUserModel(
       name: name, 
       surname: surname, 
       phoneNumber: phoneNumber, 

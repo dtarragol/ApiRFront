@@ -4,7 +4,7 @@ class PropertyModel {
   final String description;
   final double price;
   final bool isAvailable;
-  final DateTime lastAccessDate;
+  final DateTime? lastAccessDate;
   final int idUser;
   final int idPropertyType;
   final String? imageUrl;
@@ -15,7 +15,7 @@ class PropertyModel {
     required this.description,
     required this.price,
     required this.isAvailable,
-    required this.lastAccessDate,
+    this.lastAccessDate,
     required this.idUser,
     required this.idPropertyType,
     this.imageUrl,
@@ -28,7 +28,7 @@ class PropertyModel {
       'description': description,
       'price': price,
       'isAvailable': isAvailable,
-      'lastAccessDate': lastAccessDate.toIso8601String(),
+      'lastAccessDate': lastAccessDate?.toIso8601String(),
       'idUser': idUser,
       'idPropertyType': idPropertyType,
       'imageUrl': imageUrl ?? '',
@@ -37,15 +37,15 @@ class PropertyModel {
 
   factory PropertyModel.fromJson(Map<String, dynamic> json) {
     return PropertyModel(
-      id: json['id'],
-      name: json['name'],
-      description: json['description'],
-      price: json['price'],
-      isAvailable: json['isAvailable'],
-      lastAccessDate: DateTime.parse(json['lastAccessDate']),
-      idUser: json['idUser'],
-      idPropertyType: json['idPropertyType'],
-      //imageUrl: (json['images'] as List).isNotEmpty ? json['images'][0] : null,
+      id: json['id'] ?? 0,
+      name: json['name'] ?? '',
+      description: json['description'] ?? '',
+      price: (json['price'] ?? 0).toDouble(),
+      isAvailable: json['isAvailable'] ?? false,
+      lastAccessDate: json['lastAccessDate'] != null ? DateTime.parse(json['lastAccessDate']) : null,
+      idUser: json['idUser'] ?? 0,
+      idPropertyType: json['idPropertyType'] ?? 0,
+      imageUrl: json['imageUrl'],
     );
   }
 }

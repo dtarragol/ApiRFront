@@ -1,19 +1,64 @@
+import 'package:apir_front/src/models/ApartmentModel.dart';
 import 'package:apir_front/src/models/PropertyModel.dart';
+import 'package:apir_front/src/services/api/apartment.dart';
+import 'package:apir_front/src/ui/screens/Home.dart';
+import 'package:apir_front/src/ui/screens/SearchProperties.dart';
+import 'package:apir_front/src/ui/themes/app_theme.dart';
+import 'package:apir_front/src/ui/widgets/CustomAppBar.dart';
 import 'package:apir_front/src/ui/widgets/ImageCasouselCard.dart';
 import 'package:apir_front/src/utils/api_constants.dart';
 import 'package:flutter/material.dart';
 
-class PropertyDetail extends StatelessWidget {
+class PropertyDetail extends StatefulWidget {
   final PropertyModel property;
+
   const PropertyDetail(this.property);
+
+  @override
+  _PropertyPageState createState() => _PropertyPageState();
+}
+
+class _PropertyPageState extends State<PropertyDetail> with TickerProviderStateMixin {
+  Object? _propertyDetail;
+  
+  Future<void> _loadProperty() async {
+    Object? propertyDetail;
+    if(widget.property.idPropertyType == 1) {
+      propertyDetail = await ApiApartmentGet.byIdProperty(widget.property.id);
+    }else{
+      propertyDetail = await ApiApartmentGet.byIdProperty(widget.property.id);
+    }
+    setState(() {
+      _propertyDetail = propertyDetail;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadProperty();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(property.name),
+      appBar: CustomAppBar(
+        text: widget.property.name,
+        onPressed: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => HomeScreen()),
+          );
+        }
       ),
-      body: Stack(
+      body: _propertyDetail == null
+          ? Center(child: CircularProgressIndicator())
+          : Stack(
         children: [
           SingleChildScrollView(
             child: Column(
@@ -26,19 +71,59 @@ class PropertyDetail extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        property.name,
+                        widget.property.name,
                         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 8),
                       Text(
-                        "${property.price.toString()} €",
+                        "${widget.property.price.toString()} €",
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 8),
                       Text(
-                        property.description,
+                        widget.property.description,
                         style: TextStyle(fontSize: 16),
                       ),
+                      SizedBox(height: 8),
+                      if(widget.property.idPropertyType == 1)...[
+                        Text(
+                          "${(_propertyDetail as ApartmentModel).indoorSquareMeters.toString()} m2 (${(_propertyDetail as ApartmentModel).totalSquareMeters.toString()} m2)",
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        Text(
+                          'Habitaciones: ${(_propertyDetail as ApartmentModel).bedrooms.toString()}',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        if((_propertyDetail as ApartmentModel).isAnAtic)
+                          Text(
+                            'Ático',
+                            style: TextStyle(fontSize: 16),
+                          ),
+
+                        if((_propertyDetail as ApartmentModel).hasGarage)
+                          Text(
+                            '- Garaje incluido',
+                            style: TextStyle(fontSize: 16),
+                          ),
+
+                        if((_propertyDetail as ApartmentModel).hasTerrace)
+                          Text(
+                            '- Terraza',
+                            style: TextStyle(fontSize: 16),
+                          ),
+
+                        if((_propertyDetail as ApartmentModel).hasBalcony)
+                          Text(
+                            '- Balcon',
+                            style: TextStyle(fontSize: 16),
+                          ),
+
+                        if((_propertyDetail as ApartmentModel).hasGarden)
+                          Text(
+                            '- Jardin',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                      ]
                     ],
                   ),
                 ),
@@ -52,18 +137,42 @@ class PropertyDetail extends StatelessWidget {
               onPressed: () {
                 // Acción al presionar el botón
               },
+              backgroundColor: Colors.white,
               child: ClipOval(
                 child: Image.network(
                   ApiUrlConstants.image02, // Reemplaza con la URL de tu imagen
                   fit: BoxFit.cover,
-                  width: 56, // Ajusta el tamaño según sea necesario
-                  height: 56, // Ajusta el tamaño según sea necesario
+                  width: 56, 
+                  height: 56,
                   errorBuilder: (context, error, stackTrace) {
                     return Icon(Icons.error); // Muestra un icono de error si la imagen no se carga
                   },
                 ),
-              ),
-              backgroundColor: Colors.white, // Fondo blanco para el botón
+              ), // Fondo blanco para el botón
+            ),
+          ),
+          Positioned(
+            bottom: 16,
+            right: 16,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                FloatingActionButton(
+                  backgroundColor: AppTheme.accentColor,
+                  onPressed: () {
+                    // Acción al presionar el botón +
+                  },
+                  child: Icon(Icons.add),
+                ),
+                SizedBox(height: 16),
+                FloatingActionButton(
+                  backgroundColor: AppTheme.secondaryColor,
+                  onPressed: () {
+                    // Acción al presionar el botón de chat
+                  },
+                  child: Icon(Icons.chat),
+                ),
+              ],
             ),
           ),
         ],
