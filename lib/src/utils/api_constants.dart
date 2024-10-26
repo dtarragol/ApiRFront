@@ -1,5 +1,5 @@
 class ApiUrlConstants {
-  static const String baseUrl = 'https://localhost:7030';
+  static const String baseUrl = 'https://localhost:44300';
   static const String loginController = '/api/Login'; 
   static const String usersController = '/api/User'; 
   static const String propertyController = '/api/Property'; 
@@ -101,8 +101,12 @@ class ApiPostLocalizationConstants {
 //IMAGE
 class ApiPostImageConstants {
   static const String newImage = ApiUrlConstants.baseUrl + ApiUrlConstants.imageController;
+}
+class ApiGetImageConstants {
   static String byPropertyId(int idProperty) => "${ ApiUrlConstants.baseUrl + ApiUrlConstants.imageController }/byProperty/$idProperty";
-  }
+  static String existByPropertyId(int idProperty) => "${ ApiUrlConstants.baseUrl + ApiUrlConstants.imageController }/existByProperty/$idProperty";
+  static String firstByPropertyId(int idProperty) => "${ ApiUrlConstants.baseUrl + ApiUrlConstants.imageController }/firstOnProperty/$idProperty";
+}
 
 //MASTER DATA
 class ApiGetMasterDataConstants {

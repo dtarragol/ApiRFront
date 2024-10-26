@@ -1,5 +1,4 @@
 import 'package:apir_front/src/models/NewUserModel.dart';
-import 'package:apir_front/src/models/UserModel.dart';
 import 'package:apir_front/src/services/api/login.dart';
 import 'package:apir_front/src/services/api/user.dart';
 import 'package:apir_front/src/ui/screens/Home.dart';
@@ -10,6 +9,8 @@ import 'package:apir_front/src/ui/widgets/CustomElevatedButton%20copy.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
+
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
@@ -80,7 +81,7 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Container(
+              SizedBox(
                 width: 300, // Ajusta el ancho según sea necesario
                 child: CustomCenterTextField(
                   text: 'Name',
@@ -88,7 +89,7 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                 ),
               ),
               SizedBox(height: 20),
-              Container(
+              SizedBox(
                 width: 300, // Ajusta el ancho según sea necesario
                 child: CustomCenterTextField(
                   text: 'Surname',
@@ -96,7 +97,7 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                 ),
               ),
               SizedBox(height: 20),
-              Container(
+              SizedBox(
                 width: 300, // Ajusta el ancho según sea necesario
                 child: CustomCenterTextField(
                   text: 'Phone Number',
@@ -104,7 +105,7 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                 ),
               ),
               SizedBox(height: 20),
-              Container(
+              SizedBox(
                 width: 300, // Ajusta el ancho según sea necesario
                 child: CustomCenterTextField(
                   text: 'Email',
@@ -112,7 +113,7 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                 ),
               ),
               SizedBox(height: 20),
-              Container(
+              SizedBox(
                 width: 300, // Ajusta el ancho según sea necesario
                 child: CustomCenterTextField(
                   text: 'Password',
@@ -120,7 +121,7 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                 ),
               ),
               SizedBox(height: 20),
-              Container(
+              SizedBox(
                 width: 280, // Ajusta el ancho para que sea un poco menos que los TextFields
                 child: CustomElevatedButton(
                   text: 'Register',

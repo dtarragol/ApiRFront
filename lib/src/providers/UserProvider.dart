@@ -1,6 +1,5 @@
 
 import 'package:apir_front/src/models/NewUserModel.dart';
-import 'package:apir_front/src/models/UserModel.dart';
 import 'package:flutter/material.dart';
 
 class NewUserProvider with ChangeNotifier {

@@ -6,7 +6,7 @@ class CustomCard extends StatelessWidget {
   final String? imageUrl;
   final VoidCallback onPressed;
 
-  CustomCard({
+  const CustomCard({super.key, 
     required this.text,
     required this.onPressed,
     this.imageUrl,

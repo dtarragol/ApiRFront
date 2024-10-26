@@ -1,4 +1,3 @@
-import 'package:apir_front/src/models/PropertyModel.dart';
 import 'package:apir_front/src/utils/api_constants.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;

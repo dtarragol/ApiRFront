@@ -9,6 +9,8 @@ import 'package:apir_front/src/ui/widgets/CustomElevatedButton%20copy.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -22,10 +24,26 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   late Animation<Offset> _animation2;
   late Animation<double> _fadeAnimation1;
   late Animation<double> _fadeAnimation2;
+  bool? _isLoggedIn;
+
+  Future<void> _checkLoginStatus() async {
+    var isLoggedIn = await ApiGetLogin.checkLoginStatus();
+    setState(() {
+      _isLoggedIn = isLoggedIn;
+    });
+
+    if (_isLoggedIn == true) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+    }
+  }
 
   @override
   void initState() {
     super.initState();
+    _checkLoginStatus();
     _animationController1 = AnimationController(
       duration: const Duration(seconds: 2),
       vsync: this,
@@ -111,7 +129,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
       appBar: CustomAppBar(
         text: 'Login',
         onPressed: () {
-          // Acción al presionar el icono
+          // TODO
         },
         icon: Icon(
           Icons.settings,
@@ -119,15 +137,16 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
         ),
       ),
       body: Center(
-        child: Padding(
+        child: _isLoggedIn == null ? CircularProgressIndicator()
+        : Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Container(
-                height: 300, // Ajusta la altura según sea necesario (doble de 150)
-                width: double.infinity, // Ocupa todo el ancho disponible
+              SizedBox(
+                height: 300, 
+                width: double.infinity, 
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
@@ -135,9 +154,9 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                       position: _animation1,
                       child: FadeTransition(
                         opacity: _fadeAnimation1,
-                        child: Container(
-                          height: 300, // Ajusta la altura según sea necesario (doble de 150)
-                          width: 300, // Ajusta el ancho según sea necesario (doble de 150)
+                        child: SizedBox(
+                          height: 300,
+                          width: 300, 
                           child: Image.asset(
                             'assets/images/logogreen1.png',
                             fit: BoxFit.contain,
@@ -149,9 +168,9 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                       position: _animation2,
                       child: FadeTransition(
                         opacity: _fadeAnimation2,
-                        child: Container(
-                          height: 300, // Ajusta la altura según sea necesario (doble de 150)
-                          width: 300, // Ajusta el ancho según sea necesario (doble de 150)
+                        child: SizedBox(
+                          height: 300,
+                          width: 300, 
                           child: Image.asset(
                             'assets/images/logogreen2.png',
                             fit: BoxFit.contain,
@@ -163,43 +182,43 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                 ),
               ),
               SizedBox(height: 20),
-              Container(
-                width: 300, // Ajusta el ancho según sea necesario
+              SizedBox(
+                width: 300, 
                 child: CustomCenterTextField(
                   text: 'Email',
                   controller: _emailController,
                 ),
               ),
               SizedBox(height: 20),
-              Container(
-                width: 300, // Ajusta el ancho según sea necesario
+              SizedBox(
+                width: 300, 
                 child: CustomCenterTextField(
                   text: 'Password',
                   controller: _passwordController,
                 ),
               ),
               SizedBox(height: 20),
-              Container(
-                width: 280, // Ajusta el ancho para que sea un poco menos que los TextFields
+              SizedBox(
+                width: 280,
                 child: CustomElevatedButton(
                   text: 'Iniciar sesión',
                   onPressed: _login,
                 ),
               ),
               SizedBox(height: 20),
-              Container(
-                width: 280, // Ajusta el ancho para que sea un poco menos que los TextFields
+              SizedBox(
+                width: 280, 
                 child: CustomCancelElevatedButton(
                   text: 'Registrarse',
                   onPressed: _register,
                 ),
               ),
               SizedBox(height: 20),
-              Container(
-                width: 280, // Ajusta el ancho para que sea un poco menos que los TextFields
+              SizedBox(
+                width: 280, 
                 child: TextButton(
                   onPressed: () {
-                    // Acción al presionar el botón
+                    // TODO
                   },
                   child: Text(
                     '¿Has olvidado tu contraseña?',

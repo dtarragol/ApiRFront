@@ -1,8 +1,9 @@
 import 'package:apir_front/src/models/ApartmentModel.dart';
 import 'package:apir_front/src/models/PropertyModel.dart';
+import 'package:apir_front/src/models/image/ImageModel.dart';
 import 'package:apir_front/src/services/api/apartment.dart';
+import 'package:apir_front/src/services/api/image.dart';
 import 'package:apir_front/src/ui/screens/Home.dart';
-import 'package:apir_front/src/ui/screens/SearchProperties.dart';
 import 'package:apir_front/src/ui/themes/app_theme.dart';
 import 'package:apir_front/src/ui/widgets/CustomAppBar.dart';
 import 'package:apir_front/src/ui/widgets/ImageCasouselCard.dart';
@@ -12,7 +13,7 @@ import 'package:flutter/material.dart';
 class PropertyDetail extends StatefulWidget {
   final PropertyModel property;
 
-  const PropertyDetail(this.property);
+  const PropertyDetail(this.property, {super.key});
 
   @override
   _PropertyPageState createState() => _PropertyPageState();
@@ -20,6 +21,7 @@ class PropertyDetail extends StatefulWidget {
 
 class _PropertyPageState extends State<PropertyDetail> with TickerProviderStateMixin {
   Object? _propertyDetail;
+  List<String>? _propertyImages;
   
   Future<void> _loadProperty() async {
     Object? propertyDetail;
@@ -33,16 +35,20 @@ class _PropertyPageState extends State<PropertyDetail> with TickerProviderStateM
     });
   }
 
+  Future<void> _loadImages() async {
+    List<ImageModel> imageList = await ApiImageGet.byIdProperty(widget.property.id);
+    setState(() {
+      _propertyImages = imageList.map((e) => ApiUrlConstants.baseUrl+e.url).toList();
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     _loadProperty();
+    _loadImages();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +70,7 @@ class _PropertyPageState extends State<PropertyDetail> with TickerProviderStateM
             child: Column(
               children: [
                 SizedBox(height: 20),
-                ImageCarouselCard(),
+                ImageCarouselCard(imageUrls: _propertyImages),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(

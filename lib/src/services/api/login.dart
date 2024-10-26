@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:apir_front/src/models/Response/login.dart';
+import 'package:apir_front/src/models/response/login.dart';
 import 'package:apir_front/src/ui/screens/Home.dart';
 import 'package:apir_front/src/utils/api_constants.dart';
 import 'package:flutter/material.dart';
@@ -35,49 +35,25 @@ class ApiLoginPost
     }
   }
 
-  Future<String?> getToken() async {
+  static Future<String?> getToken() async {
     const storage = FlutterSecureStorage();
     return await storage.read(key: 'jwt_token');
   }
 
-  Future<void> removeToken() async {
+  static Future<void> removeToken() async {
     const storage = FlutterSecureStorage();
     await storage.delete(key: 'jwt_token');
   }
 
-  void logout(BuildContext context) async {
+  static void logout(BuildContext context) async {
     await removeToken();
     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
   }
+}
 
-  Future<void> checkLoginStatus(BuildContext context) async {
-    /*String? token = await getToken();
-    if (token != null) {
-      var idUser = await getIdUserLogged(context);
-      Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
-      String role = decodedToken['role']; 
-
-      if (role == FunctionalConstants.ROLE_COMPANY_NAME 
-          && await ApiGetCompany.CompanyExist(context, idUser)) {
-
-        Utils.navigateToPage(context, const CompanyHomePage(index: 4));
-
-      } else if (role == FunctionalConstants.ROLE_CANDIDATE_NAME
-          && await ApiGetCandidate.CandidateExist(context, idUser)) {
-
-        Utils.navigateToPage(context, const CandidateHomePage(index: 4));
-
-      } else if (role == FunctionalConstants.ROLE_COMPANY_NAME 
-          && !(await ApiGetCompany.CompanyExist(context, idUser))) {
-
-        Utils.navigateToPage(context, const NewCompanyPage());
-
-      } else if (role == FunctionalConstants.ROLE_CANDIDATE_NAME
-          && !(await ApiGetCandidate.CandidateExist(context, idUser))) {
-
-        Utils.navigateToPage(context, NewCandidatePage(idUSer: idUser));
-      }
-    }*/
+class ApiGetLogin{
+  static Future<bool> checkLoginStatus() async {
+    String? token = await ApiLoginPost.getToken();
+    return token != null;
   }
-    
 }

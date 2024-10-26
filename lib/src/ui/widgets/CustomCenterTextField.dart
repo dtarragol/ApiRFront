@@ -5,7 +5,7 @@ class CustomCenterTextField extends StatelessWidget {
   final String text;
   final TextEditingController controller;
 
-  CustomCenterTextField({
+  const CustomCenterTextField({super.key, 
     required this.text, required this.controller,
   });
 

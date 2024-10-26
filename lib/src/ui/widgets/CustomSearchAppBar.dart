@@ -6,7 +6,7 @@ class CustomSearchAppBar extends StatelessWidget implements PreferredSizeWidget 
   final VoidCallback onFilterPressed;
   final ValueChanged<String> onSearchChanged;
 
-  CustomSearchAppBar({
+  const CustomSearchAppBar({super.key, 
     required this.hintText,
     required this.onFilterPressed,
     required this.onSearchChanged,

@@ -6,7 +6,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback onPressed;
   final Icon? icon;
 
-  CustomAppBar({
+  const CustomAppBar({super.key, 
     required this.text,
     required this.onPressed,
     this.icon,

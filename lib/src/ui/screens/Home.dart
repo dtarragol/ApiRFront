@@ -5,6 +5,8 @@ import 'package:apir_front/src/ui/themes/app_theme.dart';
 import 'package:apir_front/src/ui/widgets/CustomAppBar.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -78,6 +80,8 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Center(

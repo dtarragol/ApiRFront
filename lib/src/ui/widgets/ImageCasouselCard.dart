@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class ImageCarouselCard extends StatefulWidget {
   final List<String>? imageUrls;
 
-  const ImageCarouselCard({this.imageUrls});
+  const ImageCarouselCard({super.key, this.imageUrls});
 
   @override
   _ImageCarouselCard createState() => _ImageCarouselCard();

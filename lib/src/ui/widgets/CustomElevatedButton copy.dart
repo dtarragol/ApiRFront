@@ -5,7 +5,7 @@ class CustomElevatedButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
 
-  CustomElevatedButton({
+  const CustomElevatedButton({super.key, 
     required this.text,
     required this.onPressed,
   });
@@ -23,9 +23,9 @@ class CustomElevatedButton extends StatelessWidget {
         shadowColor: AppTheme.secondaryColor.withOpacity(0.5),
         backgroundColor: AppTheme.primaryColor,
       ).copyWith(
-        backgroundColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.pressed)) {
+        backgroundColor: WidgetStateProperty.resolveWith<Color>(
+          (Set<WidgetState> states) {
+            if (states.contains(WidgetState.pressed)) {
               return AppTheme.primaryColor.withOpacity(0.8);
             }
             return AppTheme.primaryColor;
